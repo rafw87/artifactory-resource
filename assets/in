@@ -25,6 +25,7 @@ regex=$(jq -r '.source.regex // ""' < $payload)
 username=$(jq -r '.source.username // ""' < $payload)
 password=$(jq -r '.source.password // ""' < $payload)
 skip_ssl_verification=$(jq -r '.source.skip_ssl_verification // ""' < $payload)
+metadata=$(jq -r '.source.metadata // false' < $payload)
 
 repository=$(jq -r '.source.repository // ""' < $payload)
 file=$(jq -r '.params.file // ""' < $payload)
@@ -78,5 +79,11 @@ args_url="$endpoint$repository/$file"
 
 # echo $args_security "-O" "$args_url"
 curl $args_security "-O" "$args_url"
+
+if [ "$metadata" = "true" ]; then
+  mkdir .artifactory
+  echo "$args_url" > .artifactory/uri
+  echo "$version" > .artifactory/version
+fi
 
 echo $file_json | jq '.[].version | {version: {version: .}}' >&3

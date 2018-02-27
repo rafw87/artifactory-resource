@@ -21,6 +21,7 @@ resources:
     username: YOUR-ARTIFACTORY-USERNAME
     password: YOUR-ARTIFACTORY-PASSWORD
     skip_ssl_verification: true
+    metadata: true
 ```
 
 ## Source Configuration
@@ -31,6 +32,7 @@ resources:
 * `username`: *Optional.* Username for HTTP(S) auth when accessing an authenticated repository  
 * `password`: *Optional.* Password for HTTP(S) auth when accessing an authenticated repository  
 * `skip_ssl_verification`: *Optional.* Skip ssl verification when connecting to Artifactory's APIs. Values: ```true``` or ```false```(default).  
+* `metadata`: *Optional.* If true, it creates `.artifactory/version` and `.artifactory/uri` files after retrieving artifact, allowing to use version and download URL in another tasks.
 
 ## Parameter Configuration
 
