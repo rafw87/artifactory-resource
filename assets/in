@@ -82,8 +82,8 @@ curl $args_security "-O" "$args_url"
 
 if [ "$metadata" = "true" ]; then
   mkdir .artifactory
-  echo "$args_url" > .artifactory/uri
-  echo "$version" > .artifactory/version
+  echo -n "$args_url" > .artifactory/uri
+  echo -n "$version" > .artifactory/version
 fi
 
 echo $file_json | jq '.[].version | {version: {version: .}}' >&3
